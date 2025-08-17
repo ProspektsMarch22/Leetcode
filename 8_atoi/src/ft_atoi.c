@@ -32,7 +32,7 @@ int	ft_atoi(char *str)
 				if (num > INT_MAX)
 					return (INT_MIN);
 				else
-					return ((int)(sign * num));
+					return (sign * num);
 		}
 		i++;
 	}

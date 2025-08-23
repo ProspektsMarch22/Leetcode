@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <limits.h>
 
 int	ft_atoi(char *str)

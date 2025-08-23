@@ -55,7 +55,8 @@ OBS.: To not use the math library, i developed my own abs function, which i call
 
 The full checking part of the code ends up like this:
 
-`int    ft_abs(int a)
+```
+int    ft_abs(int a)
 {
     return ((a < 0) ? -a : a);
 }
@@ -66,7 +67,8 @@ int check_queen(int *board, int row, int col)
         if (board[i] == col || ft_abs(board[i] - col) == ft_abs(i - row))
             return (0);
     return (1);
-}`
+}
+```
 
 ## The Backtracking
 
@@ -81,17 +83,14 @@ I will try drawing it for a n = 4 case.
 
 First, i see the row #1. Since the board array has nothing in it, it will save a queen in the 1st row, 1st column:
 
- -- -- -- --
-| Q         |
-|           |
-|           |
-|           |
- -- -- -- --
+<img width="138" height="124" alt="Screenshot_23-Aug_21-41-02_18057" src="https://github.com/user-attachments/assets/587de0ae-8ff0-4416-8f98-8d2ac7ecf506" />
 
 Since it got a safe place, it will call the function to the next row. In terms of recursion, we are already looking to something like this:
 
-`solving_queen(row) //stoped at first column
-    solving_queen(row + 1)`
+```
+solving_queen(row) //stoped at first column
+    solving_queen(row + 1)
+```
 
 And we are looking to a board array like this: {1, *, *, *}
 
@@ -99,31 +98,31 @@ The * represents garbage.
 
 While checking, it will see that board[i] == col, since the iteration starts with 1 to easy the implementation. So it will skip the first column of the 2nd row. The 2nd column of the 2nd row will also be skipped, since it falls for the absolute difference check. It will go the third column, and find a safe place.
 
- -- -- -- --
-| Q         |
-|      Q    |
-|           |
-|           |
- -- -- -- --
+ <img width="134" height="124" alt="Screenshot_23-Aug_21-43-44_12712" src="https://github.com/user-attachments/assets/a8d37683-e531-4c91-ad49-7f2f3b0d2f13" />
 
 Next, we have:
 
-`solving_queen(row) //stoped at first column
+```
+solving_queen(row) //stoped at first column
     solving_queen(row + 1) //stoped at third column
-        solving_queen(row + 2)`
+        solving_queen(row + 2)
+```
 
 And we are looking to a board array like this: {1, 3, *, *}
 
 At this point, we come to an interesting conclusion: we don't have safe spots. The first column has a queen, the 2nd and 4th columns are diagonally adjacent to the queen at the 2nd row, and the 3rd column is vertically aligned with this latter queen. So the program will iterate through all the columns, and none of the spots will check. So the function will finish its execution. And we will come back to the immediately back recursion call:
 
-`solving_queen(row) //stopped at first column
-    solving_queen(row + 1) // will now resume from the third column`
+```
+solving_queen(row) //stopped at first column
+    solving_queen(row + 1) // will now resume from the third column
+```
 
 And there we have it!
 
 The code for the backtracking function looks like this:
 
-`void   solve_queen(int row, int *board, int n, char ****solutions, int *count)
+```
+void   solve_queen(int row, int *board, int n, char ****solutions, int *count)
 {
     for(int col = 1; col <= n; col++)
     {
@@ -136,7 +135,8 @@ The code for the backtracking function looks like this:
                 solve_queen(row + 1, board, n, solutions, count);
         }
     }
-}`
+}
+```
 
 ## Saving the solution
 
@@ -167,7 +167,8 @@ In the main function, i can declare these "global" variables (count and solution
 
 The code for the save_solution function is this:
 
-`void   save_solution(int *board, int n, char ****solutions, int *count)
+```
+void   save_solution(int *board, int n, char ****solutions, int *count)
 {
     *solutions = realloc(*solutions, sizeof(char **) * (*count + 1)); \\ This will update the size of solutions each time the save_solution is called, and it will be called everytime the backtracking function finds a solution.
     for (int i = 1; i <= n; i++)
@@ -179,13 +180,14 @@ The code for the save_solution function is this:
     }
     *count += 1;
 }
-`
+```
 
 ## The solveNQueens Function
 
 With all parts set and working, the principal function looks like this:
 
-`char ***solveNQueens(int n, int *returnSize, int **returnColumnSizes)
+```
+char ***solveNQueens(int n, int *returnSize, int **returnColumnSizes)
 {
     int board[n + 1];
     char ***solutions;
@@ -199,7 +201,8 @@ With all parts set and working, the principal function looks like this:
     for (int i = 0; i < count; i++)
         (*returnColumnSizes)[i] = n;
     return (solutions);
-}`
+}
+```
 
 The returnSize and returnColumnSizes variable serves nothing to the output, and are merely an obligation set by the challenge.
 

@@ -2,7 +2,7 @@
 
 ## First Intuition
 
-The problem of the N Queens imposes me with the task to check, multiple times, the same spots for valid position. This would be similar to a game of Skyscrappers or Sudoku. And quickly researching for algorithms that deal with this kind of problem, i found about "backtracking". 
+The problem of the N Queens imposes me with the task to check, multiple times, the same spots for valid position. This would be similar to a game of Skyscrappers or Sudoku. And quickly searching for algorithms that deal with this kind of problem, i found about "backtracking". 
 
 Backtracking is a recursive algorithm that, in this case, will be used to:
 
@@ -209,3 +209,8 @@ The returnSize and returnColumnSizes variable serves nothing to the output, and 
 ## Conclusion
 
 This challenge was a great lesson in the concepts of backtracking and dealing with functions such as memset and realloc.
+It gave me a solid idea about how to apply recursion not only as a means to implement a solution, but to implement an algorithm suited to
+a particular class of problems. The same algorithm could be used, for instance, in a "Solve Sudoku" or "Solve Skyscrappers" program - or any
+situation where the job is analyze placement of elements within static position restraints.
+
+A very similar problem to which we could apply this kind of solution is to calculate safe positions in a checkers game - of course, by changing the "check_queen" conditions we could extend this sort of solution to any particular, singular, chess piece. The thing with checkers is that all of the game's pieces have the same range of movement, so it would be a very close implementation to this one.

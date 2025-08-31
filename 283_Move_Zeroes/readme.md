@@ -6,7 +6,7 @@ When i thought about moving things in-place, i tried to take a strategy similar 
 
 The thing was that for some cases like [0, 0] or [0,0,1] that won't cut straight. 
 
-## Final strategy
+## Final Strategy
 The code then had to take a turn: this time, i acted as if i wanted to create a second array to return. So i fill this auxiliary array with zeros, and then append to it the numbers different from zero in their order of appearence. Then i copied the contents of this array to the original.
 
 ## Things to improve

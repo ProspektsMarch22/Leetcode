@@ -7,7 +7,7 @@ bool	isAnagram(char *s, char *t)
 	int	check_alpha_t[26];
 
 	if (strlen(s) != strlen(t))
-		return (0);
+		return (false);
 	memset(check_alpha_s, 0, 26 * sizeof(int));
 	memset(check_alpha_t, 0, 26 * sizeof(int));
 	for (int i = 0; s[i]; i++)
@@ -17,6 +17,6 @@ bool	isAnagram(char *s, char *t)
 	}
 	for (int i = 0; i < 26; i++)
 		if(check_alpha_s[i] != check_alpha_t[i])
-			return (0);
-	return (1);
+			return (false);
+	return (true);
 }
